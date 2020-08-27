@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Sockets;
 
 namespace Mas
 {
@@ -6,7 +7,11 @@ namespace Mas
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var manageAuction = new ManageAuction(DateTime.Now, 123,100,100);
+            MasManage masManage = new MasManage();
+
+            masManage.OfferSell(manageAuction);
+
         }
     }
 }
