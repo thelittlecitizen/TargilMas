@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Mas
@@ -9,7 +10,7 @@ namespace Mas
         public string Name;
         public int Id;
 
-        public bool NewOffer { get; set; }
+        //public bool NewOffer { get; set; }
 
         public Agent(string name, int id)
         {
@@ -27,6 +28,10 @@ namespace Mas
             }
             
             return false;
+        }
+        public int  MakeOffer(int startprice,int jumpprice)
+        {
+            return startprice + jumpprice;
         }
     }
 

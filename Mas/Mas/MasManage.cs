@@ -6,42 +6,87 @@ namespace Mas
 {
     class MasManage
     {
-        public List<Agent> agents;
-        public List<ManageAuction> auctions;
-        public List<Agent> agentsAccepted;
+        private List<Agent> Agents { get; set; }
+        public List<ManageAuction> Auctions { get; set; }
 
-        public event Func<ManageAuction, bool> Accepting;
-       // public delegate void acceptAttended(bool agentAnswer);
+        // public List<Agent> agentsAccepted;
+
+       // public event Func<ManageAuction, bool> Accepting;
+        // public delegate void acceptAttended(bool agentAnswer);
         //public event acceptAttended Accepting;
-
-        public void OfferSell(ManageAuction auctions)
+        public MasManage(List<Agent> agents, List<ManageAuction> auctions)
         {
-            Console.WriteLine("this {random. ManageAuction}  is offer, who want to attend?");
+            Agents = agents;
+            Auctions = auctions;
+        }
+        public void OfferSell()
+        {
+            /**
+            //Console.WriteLine("this {random. ManageAuction}  is offer, who want to attend?");
             //            if ((AgentAns = true) && (Accepting != null))
+            //foreach (var auction in Auctions)
+            //{
 
-            foreach (var agent in agents)
+            //}
+            //foreach (var agent in Agents)
+            //{
+
+            //    Accepting += agent.AcceptAttend;
+            //    Accepting?.Invoke(auctions);
+            //    Accepting.GetInvocationList();
+            //}
+
+            //
+            **/
+            foreach (var auction in Auctions)
             {
-                Accepting += agent.AcceptAttend;
+                foreach (var agent in Agents)
+                {
+                    if (agent.AcceptAttend(auction))
+                    {
+                        Console.WriteLine($"{agent.Name} registered {auction.UId}");
+                        //   auction.auctionAgents.Add(agent);
+                        auction.startSellEvent += agent.MakeOffer;
+
+                   
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{agent.Name} registered {auction.UId}");
+                    }
+
+                    //    Accepting += agent.AcceptAttend;
+                    //Accepting?.Invoke(auctions);
+                    //Accepting.GetInvocationList();
+                }
+                auction.Run();
             }
-            Console.WriteLine(Accepting?.Invoke(auctions));
 
-                //foreach (var auction in auctions)
-                //{
-                //    if (agent.AcceptAttend(auction))
-                //    {
-                //        auction.auctionAgents.Add(agent);
-                //    }
-                //}
-                
-            }
-            
+            /**
+            //Console.WriteLine("who want to attend x sell?");
 
 
-        
+            //Console.WriteLine(Accepting?.Invoke(auctions));
 
+            //foreach (var auction in Auctions)
+            //{
+            //    if (agent.AcceptAttend(auction))
+            //    {
+            //        auction.auctionAgents.Add(agent);
+            //    }
+            //}
+            **/
 
         }
-    }
 
+
+
+
+
+
+    }
 }
+
+
 
