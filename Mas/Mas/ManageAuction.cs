@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mas
 {//I want list of produvts that in this auction and I want list of agens that attending in this sell
@@ -15,8 +15,11 @@ namespace Mas
         public string NameMaxOffer;
         public int MinJump;
         public Product product;
+        public List<Agent> Attendingsell = new List<Agent>();
+
         public delegate int StartSell(int number, int num); // define a delegate
         public event StartSell startSellEvent;// define an event
+
 
  
 
@@ -51,9 +54,11 @@ namespace Mas
 
                 foreach (var startSellEvent in startSellEvent.GetInvocationList())
                 {
-                   var agent =(Agent)startSellEvent.Target;
-                    var resulrPrice = (int)startSellEvent?.DynamicInvoke(StartPrice, MinJump);
-                    numberandnameofmakeoffer.Add(new Tuple<int,string> (resulrPrice, agent.Name));
+                   
+                       var agent = (Agent)startSellEvent.Target;
+                       var resulrPrice = (int)startSellEvent?.DynamicInvoke(StartPrice, MinJump);
+                       numberandnameofmakeoffer.Add(new Tuple<int, string>(resulrPrice, agent.Name));
+                   
                 }
 
                 CheackMaxOffer(numberandnameofmakeoffer);
@@ -70,9 +75,19 @@ namespace Mas
 
            //startSellEvent?.Invoke(StartPrice, MinJump);
         }
+        //public void OfferSell()
+        //{
+        //    foreach (var agent in Attendingsell)
+        //    {
+        //        if (this.StartPrice + this.MinJump <= agent.MakeOffer(this.StartPrice ,this.MinJump) )
+        //        {
+        //            Console.WriteLine($"{agent.Name}: {agent.MakeOffer(this.StartPrice, this.MinJump)}");
+        //        }
+        //    }
+        }
 
     }
 
 
-}
+
 

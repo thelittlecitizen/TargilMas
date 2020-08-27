@@ -10,7 +10,6 @@ namespace Mas
         public string Name;
         public int Id;
 
-        //public bool NewOffer { get; set; }
 
         public Agent(string name, int id)
         {
@@ -31,7 +30,12 @@ namespace Mas
         }
         public int  MakeOffer(int startprice,int jumpprice)
         {
-            return startprice + jumpprice;
+            if (startprice < 100)
+            {
+                return startprice + jumpprice;
+
+            }
+            return 0;
         }
     }
 
